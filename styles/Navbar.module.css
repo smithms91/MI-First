@@ -1,0 +1,42 @@
+.navbar_container {
+    position: relative;
+}
+
+.account_box {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon_container {
+    background-color: #0A2647;
+    padding: 1rem 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: .25rem solid #2C74B3;
+    position: relative;
+}
+
+.accountButton {
+    border: none;
+    background-color: transparent;
+}
+
+
+.searchInput {
+    width: 100%;
+    /* border: 2px solid white; */
+    color: black;
+    padding: .5rem 2rem;
+    background-color: rgba(29, 170, 235, 0.726);
+    /* position: absolute; */
+}
+
+.hidden {
+    display: none;
+}
+
+.navCursor {
+    cursor: pointer;
+}
