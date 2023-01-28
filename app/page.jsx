@@ -31,7 +31,6 @@ export default function Home() {
     <main>
       <Navbar status={status}/>
       <DealContent />
-      <CityContent />
       <MobileNavbar />
     </main>
   )

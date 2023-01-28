@@ -9,7 +9,8 @@ import MainContent from '@/components/DealContent'
 import styles from '@/styles/pages/AccountPage.module.scss'
 
 import { useSession, signOut } from "next-auth/react"
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+
 
 
 

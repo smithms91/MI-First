@@ -16,6 +16,7 @@ import Input from '@mui/material/Input';
 
 export default function Navbar(props) {
     const [searchBar, setSearchBar] = useState(false)
+    const [searchValue, setSearchValue] = useState('')
 
     const { data: session, status } = useSession()
     const router = useRouter();
@@ -50,6 +51,15 @@ export default function Navbar(props) {
         setSearchBar(!searchBar);
     }
 
+    const handleKeyDown = (e) => {
+        
+        if(e.key == "Enter") {
+            console.log(searchValue)
+            setSearchValue('')
+            router.push(`/search/${searchValue}`)
+        }
+    }
+
     /*Fix later make button not clickable but still there*/
     return (
         <div className={styles.navbar_container}>
@@ -61,7 +71,7 @@ export default function Navbar(props) {
                     <SearchIcon className={styles.navCursor} onClick={(e) => handleSearchInput(e)} style={{ color: 'white' }} />
                 </div>
             </div>
-            { searchBar && <Input placeholder={'ex. City or Location'} autoFocus className={styles.searchInput}/>}
+            { searchBar && <Input placeholder={'ex. City or Location'} autoFocus className={styles.searchInput} onChange={(e) => setSearchValue(e.target.value)} onKeyDown={(e) => handleKeyDown(e)} value={searchValue} />}
         </div>
     )
 }
