@@ -47,7 +47,7 @@ export default function CityContent() {
         {isLoading ? <p>Loading...</p> : <div></div>}
         {suggestions.map((e, i) => {
           return (
-            <div className={styles.city_container}>
+            <div key={i} className={styles.city_container}>
               <h1 className={styles.city_name}>{e.Name}</h1>
               <p className={styles.city_address}>{e.Street_Address}</p>
             </div>

@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     // console.log(req.method)
     if (req.method == 'GET') {
         connectDb();
-        const response = await models.Event.find({})
+        const response = await models.Event.find()
         return res.send(response)
     }
 

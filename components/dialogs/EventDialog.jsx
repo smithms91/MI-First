@@ -123,7 +123,7 @@ export default function EventDialog({ open, handleClose, submitForm }) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={(e) => handleClose()}>Cancel</Button>
-                <Button onClick={(e) => submitForm(eventDetails)}>Create Event</Button>
+                <Button onClick={(e) => {submitForm(eventDetails); handleClose()}}>Create Event</Button>
             </DialogActions>
         </Dialog>
     )

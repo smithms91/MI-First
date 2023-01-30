@@ -7,12 +7,11 @@ import MobileNavbar from '@/components/MobileNavbar'
 import DealContent from '@/components/DealContent'
 import CityContent from '@/components/CityContent'
 //Styles
-import styles from '@/styles/pages/ProgramPage.module.scss'
+import styles from '@/styles/pages/EventPage.module.scss'
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react';
-import useSWR from "swr";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+// import useSWR from "swr";
+// const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
 export default function Events() {
@@ -20,31 +19,20 @@ export default function Events() {
 
     const [eventData, setEventData] = useState([]);
     const [retrieveData, setRetrieveData] = useState(true);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
-    
-    function useUser () {
-        const { data, error } = useSWR('/api/events', fetcher);
-        return {
-            user: data,
-            isLoading,
-            isError: error
-          }
-    }
 
-    // let newEvent = {
-    //     eventName: 'This is a wicked test event!',
-    //     date: Date.now(),
-    //     location: {
-    //         online: false,
-    //         address: '22533 Address Name'
-    //     },
-    //     hostEmail: 'a@gmail.com',
-    //     description: 'This will be our second annual test event at 22533 Address Name. Make sure you bring yourself to this event!',
-    //     likes: 0,
-    //     restrictedAge: false
-    // }
+    // const { res, error } = useSWR('/api/events', fetcher);
+    // console.log(res)
 
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch('/api/events').then((res) => res.json()).then((data) => {
+            setEventData([...data])
+            setIsLoading(false);
+        })
+    }, [])
 
     // if (!status == 'authenticated') {
     //     fetch(`/api/events/${session.user.email}`, {
@@ -76,16 +64,6 @@ export default function Events() {
     //     setEventData(tempData)
     // }
 
-    // async function getProjects(name) {
-    //   const res = await fetch(`http://localhost:3000/api/getUserData`, { cache: 'no-store' });
-    //   const projects = await res.json();
-
-    //   return projects;
-    // }
-
-    // const projects = await getProjects('smithms91');
-
-
     return (
         <main>
             <Navbar status={status} />
@@ -95,10 +73,18 @@ export default function Events() {
                     <div className="tempBox">1</div>
                     <div className="tempBox">2</div>
                     <div className="tempBox">3</div>
-                </div>}
-            <p>Events Page</p>
+                </div>
+            }
+            <h1>Events page</h1>
             {eventData.map((e, i) => {
-                return <p>{e.eventName}</p>
+                return (
+                    <div>
+                        <p>{e.eventName}</p>
+                        <p>{new Date(e.date).toLocaleDateString()}</p>
+                        <p>{e.hostEmail}</p>
+                        <hr />
+                    </div>
+                )
             })}
             <MobileNavbar />
         </main>

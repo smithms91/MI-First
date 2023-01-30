@@ -22,13 +22,13 @@ export default function DealContent(props) {
       <Suspense fallback={<p>Loading feed...</p>}>
         <div className={styles.dealContainer}>
           <div className={`${styles.indivDeal} ${styles.imageOne}`}>
-            <div className={styles.title}>Pat O' Brien's</div>
+            <div className={styles.title}>Pat O&apos; Brien&apos;s</div>
           </div>
           <div className={`${styles.indivDeal} ${styles.imageTwo}`}>
-            <div className={styles.title}>Wally's Frozen Custard</div>
+            <div className={styles.title}>Wally&apos;s Frozen Custard</div>
           </div>
           <div className={`${styles.indivDeal} ${styles.imageThree}`}>
-            <div className={styles.title}>Pat O' Brien's</div>
+            <div className={styles.title}>Pat O&apos; Brien&apos;s</div>
           </div>
         </div>
       </Suspense>

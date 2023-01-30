@@ -27,20 +27,18 @@ export default function AccountHome() {
   const [loading, setLoading] = useState(false)
 
   const [userData, setUserData] = useState({});
+  const [userEvents, setUserEvents] = useState([]);
   const [eventData, setEventData] = useState({});
-  // const [newEvent, setNewEvent] = useState({
-  //   eventName: '',
-  //   date: Date.now(),
-  //   location: {
-  //       online: '',
-  //       address: ''
-  //   },
-  //   hostEmail: '',
-  //   description: '',
-  //   likes: 0,
-  //   restrictedAge: false
-  // })
 
+  useEffect(() => {
+    if (status == 'authenticated') {
+      fetch(`/api/events/${session.user.email}`).then((res) => res.json()).then((data) => {
+        setUserEvents([...data]);
+        console.log(userEvents)
+      })
+    }
+
+  }, [status])
 
   const handleEditInfo = () => {
     if (!editInfo) setEditInfo(true); else setEditInfo(false);
@@ -54,8 +52,6 @@ export default function AccountHome() {
 
 
   const submitForm = (user) => {
-    console.log(user)
-
     setLoading(true)
     fetch('/api/users/update', {
       method: "POST",
@@ -72,8 +68,6 @@ export default function AccountHome() {
   }
 
   const addEvent = (postDetails) => {
-    console.log(postDetails)
-
     setLoading(true)
     fetch('/api/events', {
       method: "POST",
@@ -120,11 +114,24 @@ export default function AccountHome() {
             <h5>{session.user.email}</h5>
             <p onClick={() => signOut()}>Sign Out</p>
           </div>
+          <div className={styles.eventContainer}>
+
+          </div>
           <div className={styles.controlPanel}>
             <button onClick={(e) => handleEditInfo()}>Edit Info</button>
             <button onClick={(e) => handleEditEvent()}>Add Event</button>
             <button>Add Deal</button>
           </div>
+          <h1>My Events</h1>
+          <br />
+          {userEvents.map((e, i) => {
+            return (
+              <div>
+                <p>{e.eventName}</p>
+                <p>{e.location}</p>
+              </div>
+            )
+          })}
           <MobileNavbar />
         </main>
       </>

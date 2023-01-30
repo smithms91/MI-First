@@ -5,6 +5,7 @@ export default async function handler (req, res) {
         connectDb();
         const response = await models.Event.find({hostEmail: req.query.email})
         if (response) {
+            console.log(response)
             res.status(200);
             return res.send(response)
         } else {
