@@ -13,7 +13,7 @@ import styles from '@/styles/pages/ProgramPage.module.scss'
 import { useSession } from "next-auth/react"
 
 
-export default function Home() {
+export default function Programs() {
 
   const { data: session, status } = useSession()
 

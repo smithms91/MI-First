@@ -15,31 +15,31 @@ export default function MobileNavbar() {
     return (
         <div className={styles.mobilenav_container}>
             <ul className={styles.mobilenav_ul}>
-                <Link style={{'text-decoration': 'none'}} href={'/'}>
+                <Link style={{'textDecoration': 'none'}} href={'/'}>
                     <div className={styles.mobilenav_div}>
                         <HomeIcon sx={{ fontSize: 30 }} style={{ color: 'white' }} />
                         <li className={styles.mobilenav_li}>Home</li>
                     </div>
                 </Link>
-                <Link style={{'text-decoration': 'none'}} href={'/deals'}>
+                <Link style={{'textDecoration': 'none'}} href={'/deals'}>
                     <div className={styles.mobilenav_div}>
                         <LoyaltyIcon sx={{ fontSize: 30 }} style={{ color: 'white' }} />
                         <li className={styles.mobilenav_li}>Deals</li>
                     </div>
                 </Link>
-                <Link style={{'text-decoration': 'none'}} href={'/cities'}>
+                <Link style={{'textDecoration': 'none'}} href={'/cities'}>
                     <div className={styles.mobilenav_div}>
                         <LocationCityIcon sx={{ fontSize: 30 }} style={{ color: 'white' }} />
                         <li className={styles.mobilenav_li}>City</li>
                     </div>
                 </Link>
-                <Link style={{'text-decoration': 'none'}} href={'/programs'}>
+                <Link style={{'textDecoration': 'none'}} href={'/events'}>
                 <div className={styles.mobilenav_div}>
                     <FolderSpecialIcon sx={{ fontSize: 30 }} style={{ color: 'white' }} />
-                    <li className={styles.mobilenav_li}>Programs</li>
+                    <li className={styles.mobilenav_li}>Events</li>
                 </div>
                 </Link>
-                <Link style={{'text-decoration': 'none'}} href={'/about'}>
+                <Link style={{'textDecoration': 'none'}} href={'/about'}>
                 <div className={styles.mobilenav_div}>
                     <InfoIcon sx={{ fontSize: 30 }} style={{ color: 'white', }} />
                     <li className={styles.mobilenav_li}>About</li>

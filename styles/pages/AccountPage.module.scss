@@ -1,0 +1,38 @@
+.mainContainer {
+    height: 90vh;
+    background: linear-gradient(#2C74B3, #153857);
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
+
+    .contentContainer {
+        // background-color: lightblue;
+        font-size: 1.2rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 1rem;
+    
+        p {
+            font-size: .9rem;
+            font-style: italic;
+            text-decoration: underline;
+        }
+    }
+
+    .controlPanel {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 1rem;
+
+        button {
+            padding: .5rem 1rem;
+            border: 2px solid white;
+            background-color: #083863;
+            border-radius: 5px;
+            color: white;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+    }
+}
+

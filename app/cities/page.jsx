@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 //Styles
 import styles from '@/styles/pages/CityPage.module.scss'
 
-export default function CityPage() {
+export default function Cities() {
 
     return (
         <main>

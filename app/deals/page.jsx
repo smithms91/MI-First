@@ -1,4 +1,4 @@
-'use client' 
+'use client'
 /*fix so page is not client rendered and session data lives on child components where it is used. or figure out if it matters because layout is client anyway lol */
 import Image from 'next/image'
 // Component Imports
@@ -26,7 +26,7 @@ export default function Deals() {
     <main>
       <Navbar />
       <p>Deal page</p>
-      <DealContent />
+      {/* <DealContent /> */}
       <MobileNavbar />
     </main>
   )

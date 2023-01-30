@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/User.model')
+const Event = require('../models/Event.model')
 
 
 const connectDb = () => {
@@ -11,6 +12,6 @@ const connectDb = () => {
 }
 
 
-const models = { User }
+const models = { User, Event }
 
 module.exports = {models, connectDb}
