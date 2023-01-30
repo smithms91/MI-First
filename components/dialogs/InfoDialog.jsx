@@ -15,6 +15,7 @@ export default function InfoDialog({open, handleClose, name, submitForm}) {
     const [lastName, setLastName] = useState(name.lastName)
     const [email, setEmail] = useState(name.email)
     let userObj = {
+        action: 'update-user-info',
         oldName: {
             firstName: name.firstName,
             lastName: name.lastName

@@ -10,21 +10,23 @@ import CityContent from '@/components/CityContent'
 import styles from '@/styles/pages/EventPage.module.scss'
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 // import useSWR from "swr";
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
 export default function Events() {
-    const { data: session, status } = useSession()
+    const { data: session, status } = useSession();
 
     const [eventData, setEventData] = useState([]);
+    const [userData, setUserData] = useState([]);
     const [retrieveData, setRetrieveData] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
 
-    // const { res, error } = useSWR('/api/events', fetcher);
-    // console.log(res)
-
+   
 
     useEffect(() => {
         setIsLoading(true);
@@ -32,7 +34,8 @@ export default function Events() {
             setEventData([...data])
             setIsLoading(false);
         })
-    }, [])
+    }, []);
+    console.log(eventData)
 
     // if (!status == 'authenticated') {
     //     fetch(`/api/events/${session.user.email}`, {
@@ -65,7 +68,7 @@ export default function Events() {
     // }
 
     return (
-        <main>
+        <main className={styles.mainContainer}>
             <Navbar status={status} />
             {isLoading &&
                 <div>
@@ -75,17 +78,26 @@ export default function Events() {
                     <div className="tempBox">3</div>
                 </div>
             }
-            <h1>Events page</h1>
-            {eventData.map((e, i) => {
-                return (
-                    <div>
-                        <p>{e.eventName}</p>
-                        <p>{new Date(e.date).toLocaleDateString()}</p>
-                        <p>{e.hostEmail}</p>
-                        <hr />
-                    </div>
-                )
-            })}
+            <h1>Upcoming Events</h1>
+            <div className={styles.eventContainer}>
+                {eventData.map((e, i) => {
+                    return (
+                        <div className={styles.singleEvent}>
+                            <div className={styles.image}>
+                            </div>
+                            <h5>{e.eventName}</h5>
+                            <div className={styles.dateEmail}>
+                                <h6>{new Date(e.date).toLocaleDateString()}</h6>
+                                <h6>{e.hostEmail}</h6>
+                            </div>
+                            <div className={styles.likeIcon}>
+                                <FavoriteBorderIcon />
+                                <p>{e.likes}</p>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
             <MobileNavbar />
         </main>
     )

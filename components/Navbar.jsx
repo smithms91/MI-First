@@ -26,6 +26,7 @@ export default function Navbar(props) {
         e.preventDefault()
         if (user == 'authenticated') {
             let obj = {
+                action: 'create-user',
                 firstName: session.user.name.split(' ')[0],
                 lastName: session.user.name.split(' ')[1],
                 email: session.user.email

@@ -1,0 +1,68 @@
+.mainContainer {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+    height: 60rem;
+    h1 {
+        font-family: 'Source Sans Pro', sans-serif;
+        padding: 1rem 2rem;
+        text-align: left;
+        font-size: 2rem;
+    }
+}
+
+.eventContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    overflow-y: scroll;
+    .singleEvent {
+        margin: .5rem 0rem;
+        padding: 1rem 2rem;
+        position: relative;
+        .image {
+            height: 10rem;
+            background-color: grey;
+            margin-bottom: 1rem;
+        }
+
+        h5 {
+            font-size: 1.5rem;
+            margin-bottom: .5rem;
+            font-weight: bold;
+        }
+
+        h6 {
+            color: #023c88;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        p {
+            color: #023c88;
+            font-weight: bold;
+            margin-left: .5rem;
+        }
+
+        .dateEmail {
+            display: flex;
+            justify-content: space-betweend;
+        }
+
+        .likeIcon {
+            position: absolute;
+            bottom: 0;
+            right: 2rem;
+            background: white;
+            border: 2px solid white;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1px;
+            color: red;
+        }
+    }
+}

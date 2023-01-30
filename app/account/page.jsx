@@ -53,7 +53,7 @@ export default function AccountHome() {
 
   const submitForm = (user) => {
     setLoading(true)
-    fetch('/api/users/update', {
+    fetch('/api/users', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
