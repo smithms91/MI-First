@@ -1,3 +1,29 @@
+.eventTitle {
+    text-align: center;
+    margin-bottom: -1.5rem;
+    opacity: 75%;
+}
+
+.dialogHeader {
+text-align: center;
+
+}
+
+.dialogText {
+    font-size: 1rem;
+    text-align: center;
+    color: #00000090;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-top: -1rem;
+    padding: 0 1rem;
+}
+
+.dialogButton {
+    margin-top: 1rem;
+    margin-bottom: .3rem;
+    
+}
+
 .mainContainer {
     height: 90vh;
     background: linear-gradient(#2C74B3, #153857);
@@ -12,7 +38,7 @@
         align-items: center;
         justify-content: space-evenly;
         margin-top: 1rem;
-    
+
         p {
             font-size: .9rem;
             font-style: italic;
@@ -34,5 +60,43 @@
             font-family: 'Source Sans Pro', sans-serif;
         }
     }
-}
 
+    .accountContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        font-size: 2rem;
+        height: 50vh;
+        bottom: 0;
+        position: absolute;
+        width: 90vw;
+        margin: 0 1rem;
+
+        h1 {
+            margin-bottom: 2rem;;
+        }
+
+        .singleEvent {
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: .25rem;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .eventName {
+            width: 100%;
+        }
+
+        .location {
+            font-size: .9rem;
+        }
+    }
+
+    .backgroundDark {
+        background: red;
+    }
+}

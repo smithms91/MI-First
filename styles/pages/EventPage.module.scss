@@ -2,11 +2,20 @@
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
     height: 60rem;
+
     h1 {
         font-family: 'Source Sans Pro', sans-serif;
         padding: 1rem 2rem;
         text-align: left;
         font-size: 2rem;
+        background: white;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1279);
+    }
+
+    .sticky {
+        position: sticky;
+        top: 0;
+        z-index: 10;
     }
 }
 
@@ -16,14 +25,19 @@
     justify-content: center;
     font-family: 'Source Sans Pro', sans-serif;
     overflow-y: scroll;
+
     .singleEvent {
         margin: .5rem 0rem;
         padding: 1rem 2rem;
         position: relative;
+
         .image {
             height: 10rem;
             background-color: grey;
             margin-bottom: 1rem;
+            background-image: url('../../public/event.jpg');
+            background-size: contain;
+            background-position: top left;
         }
 
         h5 {
@@ -51,7 +65,7 @@
             justify-content: space-betweend;
         }
 
-        .likeIcon {
+        .socialBox {
             position: absolute;
             bottom: 0;
             right: 2rem;
@@ -59,10 +73,21 @@
             border: 2px solid white;
             border-radius: 20px;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             padding: 1px;
-            color: red;
+            color: #023c88;
+            cursor: pointer;
+        }
+
+        .likeIcon {
+            display: flex;
+            align-items: center;
+            margin-top: .25rem;
+
+            p {
+                margin-left: 0.25rem;
+                cursor: auto;
+            }
         }
     }
 }

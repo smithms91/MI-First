@@ -9,10 +9,11 @@ import styles from '@/styles/pages/CityPage.module.scss'
 export default function Cities() {
 
     return (
-        <main>
+        <main className={styles.cityContainer}>
             <Navbar />
-            <p>City Page</p>
             <CityContent />
+            <div className={styles.cityContent}>
+            </div>
             <MobileNavbar />
         </main>
 

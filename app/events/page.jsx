@@ -12,6 +12,9 @@ import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 
 // import useSWR from "swr";
 // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -26,7 +29,7 @@ export default function Events() {
     const [isLoading, setIsLoading] = useState(false);
 
 
-   
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -69,30 +72,45 @@ export default function Events() {
 
     return (
         <main className={styles.mainContainer}>
-            <Navbar status={status} />
-            {isLoading &&
-                <div>
-                    <h1>Loading Content</h1>
-                    <div className="tempBox">1</div>
-                    <div className="tempBox">2</div>
-                    <div className="tempBox">3</div>
-                </div>
-            }
-            <h1>Upcoming Events</h1>
+            <div className={styles.sticky}>
+                <Navbar status={status} />
+                {isLoading &&
+                    <Stack spacing={1}>
+                    {/* For variant="text", adjust the height via font-size */}
+                    {/* For other variants, adjust the size with `width` and `height` */}
+                    <Skeleton variant="rectangular" width={390} height={160} />
+                    <Skeleton variant="text" sx={{ fontSize: '3rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                    <Skeleton variant="rectangular" width={390} height={160} />
+                    <Skeleton variant="text" sx={{ fontSize: '3rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                    <Skeleton variant="rectangular" width={390} height={160} />
+                    <Skeleton variant="text" sx={{ fontSize: '3rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                    <Skeleton variant="rectangular" width={390} height={160} />
+                    <Skeleton variant="text"  sx={{ fontSize: '3rem' }} />
+                    <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                  </Stack>
+                }
+                <h1>Upcoming Events</h1>
+            </div>
             <div className={styles.eventContainer}>
-                {eventData.map((e, i) => {
+                {eventData.slice(0).reverse().map((e, i) => {
                     return (
                         <div className={styles.singleEvent}>
-                            <div className={styles.image}>
-                            </div>
+                            <Image src="/event.jpg" width="325" height="180" />
+                            {/* <div className={styles.image} src={eventImage}> </div> */}
                             <h5>{e.eventName}</h5>
                             <div className={styles.dateEmail}>
                                 <h6>{new Date(e.date).toLocaleDateString()}</h6>
                                 <h6>{e.hostEmail}</h6>
                             </div>
-                            <div className={styles.likeIcon}>
-                                <FavoriteBorderIcon />
-                                <p>{e.likes}</p>
+                            <div className={styles.socialBox}>
+                                <ShareIcon />
+                                <div className={styles.likeIcon}>
+                                    <FavoriteBorderIcon />
+                                    <p>{e.likes}</p>
+                                </div>
                             </div>
                         </div>
                     )

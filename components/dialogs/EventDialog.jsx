@@ -12,9 +12,9 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function EventDialog({ open, handleClose, submitForm }) {
+export default function EventDialog({ open, handleClose, submitForm, user }) {
     // const [value, setValue] = useState(Date.now());
     const [eventName, setEventName] = useState('');
     const [hostEmail, setHostEmail] = useState('');
@@ -22,10 +22,9 @@ export default function EventDialog({ open, handleClose, submitForm }) {
     const [location, setLocation] = useState({});
     const [description, setDescription] = useState('');
     const [adult, setAdult] = useState(false);
-
     let eventDetails = {
         eventName: eventName,
-        hostEmail: hostEmail,
+        hostEmail: user,
         date: String(date._d),
         location: location,
         description: description,
@@ -57,19 +56,6 @@ export default function EventDialog({ open, handleClose, submitForm }) {
                     fullWidth
                     variant="outlined"
                     onChange={(e) => setEventName(e.target.value)}
-                />
-                <DialogContentText style={{ "marginTop": "1rem", "color": "black" }}>
-                    Email
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="email"
-                    label="Email"
-                    type="string"
-                    fullWidth
-                    variant="outlined"
-                    onChange={(e) => setHostEmail(e.target.value)}
                 />
                 <DialogContentText style={{ "marginTop": "1rem", "color": "black" }}>
                     Date

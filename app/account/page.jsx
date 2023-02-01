@@ -7,11 +7,14 @@ import MobileNavbar from '@/components/MobileNavbar'
 import MainContent from '@/components/DealContent'
 //Styles
 import styles from '@/styles/pages/AccountPage.module.scss'
-
+import CloseIcon from '@mui/icons-material/Close';
 import { useSession, signOut } from "next-auth/react"
 import { redirect, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import InfoDialog from '../../components/dialogs/InfoDialog'
 import EventDialog from '../../components/dialogs/EventDialog'
 import useSWR from "swr";
@@ -24,11 +27,14 @@ export default function AccountHome() {
   const { data: session, status } = useSession()
   const [editInfo, setEditInfo] = useState(false);
   const [editEvent, setEditEvent] = useState(false);
-  const [loading, setLoading] = useState(false)
-
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState({});
   const [userEvents, setUserEvents] = useState([]);
   const [eventData, setEventData] = useState({});
+  const [deletedEvent, setDeletedEvent] = useState('')
+
+
 
   useEffect(() => {
     if (status == 'authenticated') {
@@ -39,6 +45,9 @@ export default function AccountHome() {
     }
 
   }, [status])
+
+  useEffect(() => {
+  }, [userEvents])
 
   const handleEditInfo = () => {
     if (!editInfo) setEditInfo(true); else setEditInfo(false);
@@ -68,19 +77,56 @@ export default function AccountHome() {
   }
 
   const addEvent = (postDetails) => {
+    let params = {
+      postDetails,
+      action: 'create-event'
+    }
+
     setLoading(true)
     fetch('/api/events', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(postDetails)
+      body: JSON.stringify(params)
     })
       .then((res) => res.json())
       .then((data) => {
-        setEventData(data)
+        let mutableEvents = [...userEvents];
+        mutableEvents.push(data.response)
+        console.log(mutableEvents)
+        setUserEvents(mutableEvents)
         setLoading(false)
       })
+
+  }
+
+  const handleDeleteEvent = (eventName) => {
+    let params = {
+      eventName,
+      action: 'delete-event'
+    }
+    setLoading(true)
+    fetch('/api/events', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        let deletedEventName = data.response.eventName
+        let mutableEvents = [...userEvents];
+        mutableEvents.forEach((e, i) => {
+          if (e.eventName == deletedEventName) {
+            mutableEvents.splice(i, 1);
+            setUserEvents(mutableEvents)
+          }
+        });
+        setLoading(false)
+      })
+
   }
 
   if (status === "loading") {
@@ -88,8 +134,8 @@ export default function AccountHome() {
       <>
         <main>
           <Navbar status={status} />
-          <div className="">
-            Loading.....
+          <div style={{'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'height': '85vh'}}>
+            <CircularProgress size='4rem' />
           </div>
           <MobileNavbar />
         </main>
@@ -106,8 +152,14 @@ export default function AccountHome() {
     let name = { firstName, lastName, email }
     return (
       <>
+        <Dialog className={styles.backgroundDark} onClose={(e) => setOpen(!open)} open={open}>
+          <DialogTitle className={styles.eventTitle}>{deletedEvent}</DialogTitle>
+          <DialogTitle className={styles.dialogHeader}>Are you sure?</DialogTitle>
+          <p className={styles.dialogText}>You will have to recreate this event and will lose any data associated with this event.</p>
+          <Button className={styles.dialogButton} onClick={() => { handleDeleteEvent(deletedEvent); setOpen(!open); }}>Delete Forever</Button>
+        </Dialog>
         <InfoDialog open={editInfo} handleClose={handleEditInfo} name={name} submitForm={submitForm} />
-        <EventDialog open={editEvent} handleClose={handleEditEvent} submitForm={addEvent} />
+        <EventDialog open={editEvent} handleClose={handleEditEvent} submitForm={addEvent} user={email} />
         <main className={styles.mainContainer}>
           <Navbar status={status} />
           <div className={styles.contentContainer}>
@@ -122,16 +174,19 @@ export default function AccountHome() {
             <button onClick={(e) => handleEditEvent()}>Add Event</button>
             <button>Add Deal</button>
           </div>
-          <h1>My Events</h1>
+
           <br />
-          {userEvents.map((e, i) => {
-            return (
-              <div>
-                <p>{e.eventName}</p>
-                <p>{e.location}</p>
-              </div>
-            )
-          })}
+          <div className={styles.accountContainer}>
+            <h1>My Events</h1>
+            {userEvents.slice(0).reverse().map((e, i) => {
+              return (
+                <div className={styles.singleEvent}>
+                  <p className={styles.eventName}>{e.eventName}</p>
+                  <CloseIcon onClick={() => { setOpen(!open); setDeletedEvent(e.eventName) }} />
+                </div>
+              )
+            })}
+          </div>
           <MobileNavbar />
         </main>
       </>
