@@ -7,7 +7,6 @@ import MobileNavbar from '@/components/MobileNavbar';
 import AboutContent from '@/components/AboutContent';
 import GrowBusiness from '@/components/GrowBusiness';
 import DirectoryContent from '@/components/DirectoryContent';
-import Logo from '@/public/mifirst.svg'
 
 
 import { useSession } from "next-auth/react"

@@ -22,6 +22,10 @@ export default function Navbar(props) {
     const router = useRouter();
     let user = props.status;
 
+    useEffect(() => {
+
+    }, [status])
+
     const handleAccountPage = async (e) => {
         e.preventDefault()
         if (user == 'authenticated') {
@@ -32,7 +36,7 @@ export default function Navbar(props) {
                 email: session.user.email
             }
 
-            let data = await fetch('http://localhost:3000/api/users', {
+            let data = await fetch('/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
