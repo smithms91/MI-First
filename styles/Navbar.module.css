@@ -1,5 +1,6 @@
 .navbar_container {
-    position: relative;
+    position: sticky;
+    top: 0;
 }
 
 .account_box {

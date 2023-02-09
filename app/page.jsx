@@ -5,31 +5,29 @@ import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import MobileNavbar from '@/components/MobileNavbar'
 import DealContent from '@/components/DealContent'
+import GrowBusiness from '@/components/GrowBusiness'
+import DirectoryContent from '@/components/DirectoryContent'
 import CityContent from '@/components/CityContent'
 //Styles
 import styles from '@/styles/pages/HomePage.module.scss'
 
 
 import { useSession } from "next-auth/react"
+import { useEffect } from 'react'
 
 
 export default function Home() {
   const { data: session, status } = useSession()
+  useEffect(() => {window.scrollTo(0, 0)}, []);
 
-  // async function getProjects(name) {
-  //   const res = await fetch(`http://localhost:3000/api/getUserData`, { cache: 'no-store' });
-  //   const projects = await res.json();
-  
-  //   return projects;
-  // }
-  
-  // const projects = await getProjects('smithms91');
 
 
   return (
     <main>
       <Navbar status={status}/>
       <DealContent />
+      <GrowBusiness status={{getStarted: true, update: true}} />
+      <DirectoryContent />
       <MobileNavbar />
     </main>
   )

@@ -1,11 +1,13 @@
 'use client' 
 /*fix so page is not client rendered and session data lives on child components where it is used. or figure out if it matters because layout is client anyway lol */
-import Image from 'next/image'
+import Image from 'next/image';
 // Component Imports
-import Navbar from '@/components/Navbar'
-import MobileNavbar from '@/components/MobileNavbar'
-import DealContent from '@/components/DealContent'
-import CityContent from '@/components/CityContent'
+import Navbar from '@/components/Navbar';
+import MobileNavbar from '@/components/MobileNavbar';
+import AboutContent from '@/components/AboutContent';
+import GrowBusiness from '@/components/GrowBusiness';
+import DirectoryContent from '@/components/DirectoryContent';
+import Logo from '@/public/mifirst.svg'
 
 
 import { useSession } from "next-auth/react"
@@ -28,7 +30,9 @@ export default function About() {
   return (
     <main>
       <Navbar status={status}/>
-      <p>About Page</p>
+      <AboutContent />
+      <GrowBusiness status={{getStarted: true, update: true}} />
+      <DirectoryContent />
       <MobileNavbar />
     </main>
   )

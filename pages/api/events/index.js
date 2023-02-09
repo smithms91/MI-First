@@ -17,6 +17,9 @@ export default async function handler(req, res) {
             case 'delete-event': {
                 return deleteEvent(req, res);
             }
+            case 'modify-event': {
+                return modifyEvent(req, res);
+            }
         }
 
     }
@@ -47,9 +50,6 @@ export default async function handler(req, res) {
         }
     };
 
-
-
-
     async function deleteEvent (req, res) {
         connectDb();
         if (!req.body) {
@@ -63,6 +63,22 @@ export default async function handler(req, res) {
                 return await response[0].deleteOne({ eventName: req.body.eventName });
             }
         }
+    };
+
+    async function modifyEvent (req, res) {
+        console.log(req.body)
+        // connectDb();
+        // if (!req.body) {
+        //     return res.status(400).json({ message: 'You need to send an event object!' })
+        // } else {
+        //     const response = await models.Event.find({ eventName: req.body.eventName })
+        //     if (response.length == 0) {
+        //         res.status(400).json({ 'message': 'This event doesnt exist.' });
+        //     } else {
+        //         res.status(200).json({ 'message': 'Your event has been deleted.', 'response': response[0] })
+        //         return await response[0].deleteOne({ eventName: req.body.eventName });
+        //     }
+        // }
     };
 
 }

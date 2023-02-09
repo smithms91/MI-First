@@ -17,7 +17,8 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import InfoDialog from '../../components/dialogs/InfoDialog'
 import EventDialog from '../../components/dialogs/EventDialog'
-import useSWR from "swr";
+import ModifyEventDialog from '../../components/dialogs/ModifyEventDialog'
+import EditIcon from '@mui/icons-material/Edit';
 
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -29,11 +30,12 @@ export default function AccountHome() {
   const [editEvent, setEditEvent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [userData, setUserData] = useState({});
   const [userEvents, setUserEvents] = useState([]);
   const [eventData, setEventData] = useState({});
   const [deletedEvent, setDeletedEvent] = useState('')
-
+  const [currentEvent, setCurrentEvent] = useState({})
 
 
   useEffect(() => {
@@ -52,7 +54,6 @@ export default function AccountHome() {
   const handleEditInfo = () => {
     if (!editInfo) setEditInfo(true); else setEditInfo(false);
   }
-
 
   const handleEditEvent = () => {
     if (!editEvent) setEditEvent(true); else setEditEvent(false);
@@ -129,6 +130,36 @@ export default function AccountHome() {
 
   }
 
+  const handleModifyEvent = (event) => {
+    setCurrentEvent(event);
+    let params = {
+      event,
+      action: 'modify-event'
+    }
+    setLoading(true)
+    fetch('/api/events', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // let modifiedEventName = data.response.eventName
+        // let mutableEvents = [...userEvents];
+        // mutableEvents.forEach((e, i) => {
+        //   if (e.eventName == modifiedEventName) {
+        //     mutableEvents.splice(i, 1);
+        //     setUserEvents(mutableEvents)
+        //   }
+        // });
+        // setLoading(false)
+      })
+
+  }
+
   if (status === "loading") {
     return (
       <>
@@ -158,8 +189,11 @@ export default function AccountHome() {
           <p className={styles.dialogText}>You will have to recreate this event and will lose any data associated with this event.</p>
           <Button className={styles.dialogButton} onClick={() => { handleDeleteEvent(deletedEvent); setOpen(!open); }}>Delete Forever</Button>
         </Dialog>
+        
+        <ModifyEventDialog open={editOpen} handleClose={setEditOpen} user={email} event={currentEvent} submitForm={handleEditEvent} />
         <InfoDialog open={editInfo} handleClose={handleEditInfo} name={name} submitForm={submitForm} />
         <EventDialog open={editEvent} handleClose={handleEditEvent} submitForm={addEvent} user={email} />
+
         <main className={styles.mainContainer}>
           <Navbar status={status} />
           <div className={styles.contentContainer}>
@@ -182,6 +216,7 @@ export default function AccountHome() {
               return (
                 <div className={styles.singleEvent}>
                   <p className={styles.eventName}>{e.eventName}</p>
+                  <EditIcon onClick={() => { setEditOpen(!editOpen); handleModifyEvent(e) }}  />
                   <CloseIcon onClick={() => { setOpen(!open); setDeletedEvent(e.eventName) }} />
                 </div>
               )

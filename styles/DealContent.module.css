@@ -9,6 +9,7 @@
     background-size: cover;
     background-position: top right;
     border-bottom: 4px solid #144272;
+    min-height: 90vh;
 }
 
 .image_container {
@@ -36,7 +37,7 @@
 }
 
 .main_header span {
-    color: blue;
+    color: rgb(255, 251, 0);
 }
 
 .dealContainer {
@@ -62,7 +63,7 @@
 
 .title {
     padding: .5rem 2rem;
-    background-color: rgba(146, 160, 238, 0.808);
+    background-color: rgba(0, 0, 0, 0.658);
     font-size: 1.5rem;
 }
 
