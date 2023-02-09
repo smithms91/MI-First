@@ -22,10 +22,6 @@ export default function Navbar(props) {
     const router = useRouter();
     let user = props.status;
 
-    useEffect(() => {
-
-    }, [status])
-
     const handleAccountPage = async (e) => {
         e.preventDefault()
         if (user == 'authenticated') {
