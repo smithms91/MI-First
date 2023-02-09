@@ -1,7 +1,7 @@
 import styles from '../styles/GrowBusiness.module.css'
 
 
-export default function AboutContent({ status }) {
+export default function GrowBusiness({ status }) {
     return (
         <div className={styles.grow_container}>
             <h1>Let MI-First.com</h1>
@@ -10,7 +10,7 @@ export default function AboutContent({ status }) {
                 <>
                     <h3>Get Your Business Listed</h3>
                     <p>Reach more customers in more ways. Let us create a custom-tailored program to help your business grow.</p>
-                    <button>Let's Get Started</button>
+                    <button>Let&apos;s Get Started</button>
                 </>
             }
             {status.update &&
